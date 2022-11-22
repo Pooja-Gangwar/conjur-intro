@@ -34,10 +34,12 @@ EOF
 }
 
 function _set_master_multi_node_proxy_config {
+  echo "Pooja Gangwar TCS 4"
   cp files/haproxy/master/multi-node/haproxy.cfg files/haproxy/master/haproxy.cfg
 }
 
 function _set_master_single_node_proxy_config {
+  echo "Pooja Gangwar TCS 5"
   cp files/haproxy/master/single/haproxy.cfg files/haproxy/master/haproxy.cfg
 }
 
@@ -341,7 +343,7 @@ function _upgrade_via_backup_restore {
 }
 
 function _stop_and_remove_master {
-  podman stop conjur-master-1.mycompany.local 
+  podman stop conjur-master-1.mycompany.local
   podman rm conjur-master-1.mycompany.local
 }
 
@@ -414,7 +416,7 @@ function _rotate_certificates {
   local cert_path='/opt/cyberark/dap/configuration/certificates'
   _run conjur-master-1.mycompany.local \
     "evoke ca import --force --key $cert_path/dap_master/dap-master-key.pem --set $cert_path/dap_master/dap-master.pem"
-  
+
   # Import the new Follower certificate into the active DAP master so that it
   # is available through the seed service
   _run conjur-master-1.mycompany.local \
@@ -424,17 +426,17 @@ function _rotate_certificates {
   if [[ $(podman ps --quiet --filter "name=conjur-master-2.mycompany.local") ]]; then
     _run conjur-master-2.mycompany.local \
       "evoke ca import --force --key $cert_path/dap_master/dap-master-key.pem --set $cert_path/dap_master/dap-master.pem"
-  
+
     # Import the new Follower certificate into each DAP Standby so that it
     # is available through the seed service if the Standby is promoted.
     _run conjur-master-2.mycompany.local \
       "evoke ca import --force --key $cert_path/dap_follower/dap-follower-key.pem $cert_path/dap_follower/dap-follower.pem"
   fi
-  
+
   if [[ $(podman ps --quiet --filter "name=conjur-master-3.mycompany.local") ]]; then
     _run conjur-master-3.mycompany.local \
       "evoke ca import --force --key $cert_path/dap_master/dap-master-key.pem --set $cert_path/dap_master/dap-master.pem"
-  
+
     # Import the new Follower certificate into each DAP Standby so that it
     # is available through the seed service if the Standby is promoted.
     _run conjur-master-3.mycompany.local \

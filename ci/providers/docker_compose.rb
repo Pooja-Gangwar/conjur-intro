@@ -21,6 +21,7 @@ module CI
       end
 
       def provision_master(version:, with_load_balancer: true)
+        echo "Pooja Gangwar TCS 7"
         system('cp files/haproxy/master/single/haproxy.cfg files/haproxy/master/haproxy.cfg')
         system({ 'VERSION' => version }, 'docker-compose up -d --no-deps conjur-master.mycompany.local conjur-master-1.mycompany.local')
         args = [
