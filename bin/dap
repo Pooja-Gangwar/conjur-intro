@@ -234,7 +234,8 @@ function _start_l7_load_balancer {
 function _configure_master {
   # Copy DH Param
   echo "Pooja Gangwar TCS test"
-  docker-compose cp files/dhparam.pem conjur-master-1.mycompany.local:"${DHPATH}"/dhparam.pem
+  echo "admin api key: $(DHPATH) "
+  docker compose cp files/dhparam.pem conjur-master-1.mycompany.local:"${DHPATH}"/dhparam.pem
   echo "Pooja Gangwar TCS test "
   _cmd="evoke configure master"
   _cmd="$_cmd --accept-eula"
