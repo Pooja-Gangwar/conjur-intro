@@ -233,8 +233,13 @@ function _start_l7_load_balancer {
 
 function _configure_master {
   # Copy DH Param
-  echo ' Point 1 '
-  docker-compose cp files/dhparam.pem conjur-master-1.mycompany.local:${DHPATH}/dhparam.pem
+  echo ' Point 1 - changes on 2nd Dec '
+  # docker-compose cp files/dhparam.pem conjur-master-1.mycompany.local:${DHPATH}/dhparam.pem
+
+  docker cp /files/dhparam.pem conjur-master-1.mycompany.local:${DHPATH}/dhparam.pem
+
+  # docker cp /path/to/file.txt "$(docker-compose ps -q service)":/path/in/container.txt
+
   echo ' Point 2 '
   _cmd="evoke configure master"
   _cmd="$_cmd --accept-eula"
