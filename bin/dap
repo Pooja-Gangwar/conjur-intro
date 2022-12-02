@@ -236,7 +236,7 @@ function _configure_master {
   echo ' Point 1 - changes on 2nd Dec '
   # docker-compose cp files/dhparam.pem conjur-master-1.mycompany.local:${DHPATH}/dhparam.pem
 
-  docker-compose cp files/dhparam.pem conjur-master-1.mycompany.local:/etc/ssl/dhparam.pem
+  docker cp files/dhparam.pem conjur-master-1.mycompany.local:/etc/ssl/dhparam.pem
 
   # docker cp /path/to/file.txt "$(docker-compose ps -q service)":/path/in/container.txt
 
